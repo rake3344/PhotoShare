@@ -79,3 +79,146 @@
   object-fit: cover;
   height: 100%;
 }
+
+.detail-comments {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  width: 100%;
+}
+
+.comment-box {
+  display: flex;
+  margin-bottom: 1rem;
+  width: 500px;
+}
+
+.form-comment {
+  border: none;
+  outline: none;
+}
+
+.form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-comment {
+  display: flex;
+  align-items: center;
+}
+
+.form-comment button {
+  border: none;
+  outline: none;
+  background: #a569bd;
+  width: 65px;
+  height: 30px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.form-comment button:hover {
+  transform: scale(1.1);
+  background: #9254aa;
+}
+
+.form-comment button:active {
+  transform: scale(0.6);
+}
+
+.form-comment input {
+  margin: 0 1rem;
+  width: 450px;
+  height: 30px;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #a569bd;
+}
+
+.comment-box img {
+  width: 30px;
+  height: 30px;
+  border-radius: 60px;
+  margin-right: 1rem;
+}
+
+.comments {
+  width: 100%;
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.comment img {
+  width: 30px;
+  height: 30px;
+  border-radius: 60px;
+  margin-right: 1rem;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  border-radius: 10px;
+  width: 400px;
+  height: 100px;
+  padding: 0 1rem;
+  word-wrap: break-word;
+}
+
+.username-comment {
+  font-weight: bold;
+  color: #262626;
+  margin-bottom: 0.5rem;
+}
+
+.name_icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.trash-icon {
+  cursor: pointer;
+  margin: 0.5rem;
+}
+
+.trash-icon:hover {
+  transform: scale(1.1);
+}
+
+.trash-icon:active {
+  transform: scale(1);
+}
+
+.edit-icon {
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  transform: scale(1.1);
+}
+
+.edit-icon:active {
+  transform: scale(1);
+}

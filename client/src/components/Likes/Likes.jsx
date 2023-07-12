@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import "./Likes.css";
+import { axiosInterceptor } from "../auth/auth";
 
+axiosInterceptor();
 export default function Likes({ image_id }) {
   const [liked, setLiked] = useState([]);
   const [user, setUser] = useState([]);
