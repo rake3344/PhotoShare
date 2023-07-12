@@ -1,0 +1,26 @@
+import { Router } from "express";
+import { verifyToken } from "../middlewares/session.js";
+import upload from "../middlewares/multer.js";
+import {
+  dislikeImage,
+  getCountLikes,
+  getImageUserById,
+  getImages,
+  getImagesUserById,
+  imageLike,
+  postsCount,
+  uploadImage,
+} from "../controller/images.controller.js";
+
+const imagesRouter = Router();
+
+imagesRouter.post("/upload-image", verifyToken, upload, uploadImage);
+imagesRouter.get("/get-images", verifyToken, getImages);
+imagesRouter.get("/posts-count", verifyToken, postsCount);
+imagesRouter.get("/user-images/:user_id", verifyToken, getImagesUserById);
+imagesRouter.get("/image/:image_id", verifyToken, getImageUserById);
+imagesRouter.get("/likes/:image_id", verifyToken, getCountLikes);
+imagesRouter.post("/like-image/:image_id", verifyToken, imageLike);
+imagesRouter.delete("/dislike/:image_id", verifyToken, dislikeImage);
+
+export default imagesRouter;
