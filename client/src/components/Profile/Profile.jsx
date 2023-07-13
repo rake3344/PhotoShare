@@ -20,21 +20,20 @@ export default function Profile() {
   const [posts, setPosts] = useState(0);
   const [followers, setFollowers] = useState(0);
   const [following, setFollowing] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      const resp = await axios.get("/user/profile");
-      console.log(resp);
-      setData({
-        username: resp.data.userProfile.username,
-        name: resp.data.userProfile.first_name,
-        lastname: resp.data.userProfile.last_name,
-        email: resp.data.userProfile.email,
-        profile_photo: resp.data.userProfile.profile_photo,
+      await axios.get("/user/profile").then((resp) => {
+        setData({
+          username: resp.data.userProfile.username,
+          name: resp.data.userProfile.first_name,
+          lastname: resp.data.userProfile.last_name,
+          email: resp.data.userProfile.email,
+          profile_photo: resp.data.userProfile.profile_photo,
+        });
+        setLoading(false);
       });
-      setLoading(false);
     };
     fetchData();
   }, []);
@@ -56,13 +55,13 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
     const fetchImages = async () => {
-      const resp = await axios.get("/images/get-images");
-      setImages(resp.data.images);
+      await axios.get("/images/get-images").then((resp) => {
+        setImages(resp.data.images);
+        setLoading(false);
+      });
     };
     fetchImages();
-    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -118,7 +117,7 @@ export default function Profile() {
                 </div>
                 <div className="profile-bio">
                   <span>{data.email}</span>
-                  <span className="profile-name">{data.name}</span>
+                  <span className="profile-real-name">{data.name}</span>
                 </div>
               </div>
             </div>

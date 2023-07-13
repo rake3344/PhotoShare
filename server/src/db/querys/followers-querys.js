@@ -93,3 +93,39 @@ export const followersData = async (id) => {
     return error;
   }
 };
+
+export const getCountFollowersFromUser = async (id_user) => {
+  try {
+    const [followers] = await pool.query(
+      "SELECT COUNT('follower_id') AS followers_user FROM followers WHERE following_id = ?",
+      [id_user]
+    );
+    return followers;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCountFollowingFromUser = async (id_user) => {
+  try {
+    const [following] = await pool.query(
+      "SELECT COUNT('following_id') AS following_user FROM followers WHERE follower_id = ?",
+      [id_user]
+    );
+    return following;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const unfollowUser = async (id, id_user) => {
+  try {
+    await pool.query(
+      "DELETE FROM followers WHERE follower_id = ? && following_id = ?",
+      [id, id_user]
+    );
+    return true;
+  } catch (error) {
+    return error;
+  }
+};

@@ -6,6 +6,7 @@ import Navbar from "../Navbar/Navbar";
 import { axiosInterceptor } from "../auth/auth";
 import Likes from "../Likes/Likes";
 import { BsTrash } from "react-icons/bs";
+import Loader from "../Loader/Loader";
 
 axiosInterceptor();
 export default function ImageDetail() {
@@ -16,11 +17,14 @@ export default function ImageDetail() {
   const [commentData, setCommentData] = useState({
     comment: "",
   });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const imageFetch = async () => {
-      const resp = await axios.get(`/images/image/${image_id}`);
-      setImage(resp.data.image);
+      await axios.get(`/images/image/${image_id}`).then((resp) => {
+        setImage(resp.data.image);
+        setLoading(false);
+      });
     };
     imageFetch();
   }, []);
@@ -59,6 +63,14 @@ export default function ImageDetail() {
   commentFetch();
 
   // ------------------ Comments ------------------ //
+
+  if (loading) {
+    return (
+      <div className="loader">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <>

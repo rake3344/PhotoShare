@@ -10,14 +10,14 @@ import Likes from "../Likes/Likes";
 axiosInterceptor();
 export default function Home() {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetcPosts = async () => {
-      setLoading(true);
-      const resp = await axios.get("/user/images");
-      setPosts(resp.data.images);
-      setLoading(false);
+      await axios.get("/user/images").then((resp) => {
+        setPosts(resp.data.images);
+        setLoading(false);
+      });
     };
     fetcPosts();
   }, []);
@@ -40,15 +40,17 @@ export default function Home() {
               <div className="instacard" key={index}>
                 <div className="header">
                   <div className="info">
-                    <img
-                      src={
-                        post.profile_photo != null
-                          ? `../../src/uploads/${post.profile_photo}`
-                          : `../../src/uploads/user-default.png`
-                      }
-                      className="instacard-profile-image"
-                      alt="profile-pic"
-                    />
+                    <Link to={`/user/${post.id_user}`}>
+                      <img
+                        src={
+                          post.profile_photo != null
+                            ? `../../src/uploads/${post.profile_photo}`
+                            : `../../src/uploads/user-default.png`
+                        }
+                        className="instacard-profile-image"
+                        alt="profile-pic"
+                      />
+                    </Link>
                     <span className="instacard-profile-name">
                       {post.username}
                     </span>

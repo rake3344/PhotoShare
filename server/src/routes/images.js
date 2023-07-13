@@ -4,6 +4,7 @@ import upload from "../middlewares/multer.js";
 import {
   dislikeImage,
   getCountLikes,
+  getCountPostsFromUser,
   getImageUserById,
   getImages,
   getImagesUserById,
@@ -20,6 +21,7 @@ imagesRouter.get("/posts-count", verifyToken, postsCount);
 imagesRouter.get("/user-images/:user_id", verifyToken, getImagesUserById);
 imagesRouter.get("/image/:image_id", verifyToken, getImageUserById);
 imagesRouter.get("/likes/:image_id", verifyToken, getCountLikes);
+imagesRouter.get("/posts-user/:user_id", verifyToken, getCountPostsFromUser);
 imagesRouter.post("/like-image/:image_id", verifyToken, imageLike);
 imagesRouter.delete("/dislike/:image_id", verifyToken, dislikeImage);
 

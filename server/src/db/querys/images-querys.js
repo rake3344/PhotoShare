@@ -139,3 +139,15 @@ export const countLikes = async (id_image) => {
     return error;
   }
 };
+
+export const countPostsFromUser = async (id_user) => {
+  try {
+    const [posts] = await pool.query(
+      "SELECT COUNT(id_image) AS posts FROM images WHERE user_id = ?",
+      [id_user]
+    );
+    return posts;
+  } catch (error) {
+    return error;
+  }
+};
