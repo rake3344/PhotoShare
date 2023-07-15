@@ -46,17 +46,7 @@ export default function Upload() {
             <h1 className="upload-title">
               Share Your <span>Picture</span>
             </h1>
-
             <div className="form-group">
-              {/* <div className="title-wrapper">
-                <label>Title</label>
-                <input
-                  type="text"
-                  name="title"
-                  value={data.title}
-                  onChange={handleChange}
-                />
-              </div> */}
               <div className="img-wrapper">
                 <input
                   type="file"

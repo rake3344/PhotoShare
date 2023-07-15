@@ -78,8 +78,8 @@ export default function UserProfile() {
         <div className="user-header">
           <img
             src={
-              user.profile_photo != null
-                ? `../../src/uploads/${user.profile_photo}`
+              user[0].profile_photo != null
+                ? `../../src/uploads/${user[0]?.profile_photo}`
                 : `../../src/uploads/user-default.png`
             }
             alt="profile-pic"

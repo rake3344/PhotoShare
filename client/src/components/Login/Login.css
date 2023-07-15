@@ -1,18 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.wrapper_login {
+  max-width: 1300px;
+  height: 900px;
+  margin: 0 auto;
+  background: #fff;
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(215, 104, 230, 0.5);
+}
+
+.title-login-container {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+}
+
+.title-login {
+  font-size: 5em;
+  font-family: "Shadows Into Light", cursive;
+  font-weight: bold;
+  color: #fff;
+}
+
+.span_login {
+  font-size: 1.1em;
+  font-family: "Shadows Into Light", cursive;
+  font-weight: bold;
+  color: #9b59b6;
+}
+
+.form_login__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.form__login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  height: 400px;
+}
+
+.inputs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input__login {
+  margin-top: 2rem;
+  width: 380px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #9b59b6;
+  font-size: 1.2em;
+}
+
 .h1__login {
   font-size: 3em;
   font-family: "Shadows Into Light", cursive;
   font-weight: bold;
-}
-
-.wrapper__title {
-  font-size: 5em;
-  font-family: "Shadows Into Light", cursive;
-  font-weight: bold;
-}
-
-.wrapper__title span {
-  font-size: 1em;
-  font-family: "Shadows Into Light", cursive;
-  font-weight: bold;
   color: #9b59b6;
+}
+
+.login__btn {
+  width: 200px;
+  height: 35px;
+  background: #9b59b6;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.login__btn:hover {
+  transform: scale(1.1);
+  background: #8e44ad;
+}
+
+.login__btn:active {
+  transform: scale(1.1);
+  background: #8e44ad;
 }

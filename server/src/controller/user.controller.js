@@ -4,10 +4,20 @@ import { compare, hash } from "bcrypt";
 import { SignJWT } from "jose";
 import { config } from "dotenv";
 import {
+  banUser,
+  editProfile,
+  editProfilePic,
   getAllUsersWithImages,
   getUserAdmin,
   getUserLogin,
   getUsersAdmin,
+  mostPopularUsers,
+  unbanUser,
+  updataEmail,
+  updataUsername,
+  updateFirstName,
+  updateLastName,
+  updatePassword,
 } from "../db/querys/user-querys.js";
 config();
 
@@ -133,8 +143,158 @@ export const getAllImagesWithUser = async (req, res) => {
     const user = await getUserLogin(id);
     if (user.length === 0) return res.status(200).json({ msg: "No login" });
     const images = await getAllUsersWithImages(id);
-    // const imagesActive = images.filter((image) => image.activo === 1);
     res.status(200).json({ images });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const userAdmin = async (req, res) => {
+  try {
+    const { id } = req;
+    const userAdmin = await getUserAdmin(id);
+    if (userAdmin.length === 0)
+      return res.status(401).json({ msg: "No login" });
+    res.status(200).json({ userAdmin });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const userBan = async (req, res) => {
+  try {
+    const { id } = req;
+    const { id_user } = req.params;
+    const userAdmin = await getUserAdmin(id);
+    if (userAdmin.length === 0) res.status(401).json({ msg: "No access" });
+    const ban = await banUser(id_user);
+    if (ban === true) {
+      res.status(200).json({ msg: "User banned successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const userUnban = async (req, res) => {
+  try {
+    const { id } = req;
+    const { id_user } = req.params;
+    const userAdmin = await getUserAdmin(id);
+    if (userAdmin.length === 0) res.status(401).json({ msg: "No access" });
+    const unBan = await unbanUser(id_user);
+    if (unBan === true) {
+      res.status(200).json({ msg: "User unbanned successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const mostPopulars = async (req, res) => {
+  try {
+    const { id } = req;
+    const user = await getUserLogin(id);
+    if (user.length === 0) return res.status(200).json({ msg: "No login" });
+    const populars = await mostPopularUsers();
+    res.status(200).json({ populars });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const editProfileUser = async (req, res) => {
+  try {
+    const { id } = req;
+    const { username, first_name, last_name, email, newpassword } = req.body;
+    const hashPassword = await hash(newpassword, 12);
+    const user = await getUserLogin(id);
+    if (user.length === 0) return res.status(200).json({ msg: "No login" });
+    if (
+      username === "" &&
+      first_name === "" &&
+      last_name === "" &&
+      email === "" &&
+      newpassword === ""
+    )
+      return res.status(200).json({ msg: "Empty fields" });
+    if (username && !first_name && !last_name && !email && !newpassword) {
+      const editUsername = await updataUsername(id, username);
+      if (editUsername === true) {
+        return res.status(200).json({ msg: "Profile edited successfully" });
+      } else {
+        res.status(200).json({ editUsername });
+      }
+    }
+
+    if (first_name && !username && !last_name && !email && !newpassword) {
+      const editFirstName = await updateFirstName(id, first_name);
+      if (editFirstName === true) {
+        return res.status(200).json({ msg: "Profile edited successfully" });
+      } else {
+        res.status(200).json({ editFirstName });
+      }
+    }
+
+    if (last_name && !username && !first_name && !email && !newpassword) {
+      const editLastName = await updateLastName(id, last_name);
+      if (editLastName === true) {
+        return res.status(200).json({ msg: "Profile edited successfully" });
+      } else {
+        res.status(200).json({ editLastName });
+      }
+    }
+
+    if (email && !username && !first_name && !last_name && !newpassword) {
+      const editEmail = await updataEmail(id, email);
+      if (editEmail === true) {
+        return res.status(200).json({ msg: "Profile edited successfully" });
+      } else {
+        res.status(200).json({ editEmail });
+      }
+    }
+
+    if (newpassword && !username && !first_name && !last_name && !email) {
+      const editPassword = await updatePassword(id, hashPassword);
+      if (editPassword === true) {
+        return res.status(200).json({ msg: "Profile edited successfully" });
+      } else {
+        res.status(200).json({ editPassword });
+      }
+    }
+    if (username && first_name && last_name && email && newpassword) {
+      const editAll = await editProfile(
+        id,
+        username,
+        first_name,
+        last_name,
+        email,
+        hashPassword
+      );
+      if (editAll === true) {
+        return res.status(200).json({ msg: "Profile updated successfully" });
+      } else {
+        res.status(200).json({ editAll });
+      }
+    }
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const changeProfilePic = async (req, res) => {
+  try {
+    const { id } = req;
+    let file = "";
+    if (req.file === undefined) {
+      file = "";
+    } else {
+      file = req.file.filename;
+    }
+    const changePhoto = await editProfilePic(id, file);
+    if (changePhoto === true) {
+      res.status(200).json({ msg: "Profile photo changed successfully" });
+    }
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

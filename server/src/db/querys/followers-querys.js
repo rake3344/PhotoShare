@@ -52,6 +52,14 @@ export const countFollowers = async (id) => {
       "SELECT COUNT('follower_id') AS followers_user FROM followers WHERE following_id = ?",
       [id]
     );
+    const followers = followersCount[0].followers_user;
+    if (followers === null) {
+      followers = 0;
+    }
+    await pool.query("UPDATE users SET followers = ? WHERE id_user = ?", [
+      followers,
+      id,
+    ]);
     return followersCount;
   } catch (error) {
     return error;

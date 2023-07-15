@@ -68,7 +68,7 @@ export default function Login() {
       toastInvaildCredentials();
       return setLoading(false);
     }
-    if (resp.data.msg === "User does not exist") {
+    if (resp.data.error === "User does not exist") {
       toastUserDoesNotExist();
       return setLoading(false);
     }
@@ -84,38 +84,43 @@ export default function Login() {
 
   return (
     <>
-      <div className="wrapper">
-        <h1 className="wrapper__title">
-          Photo<span>Share</span>
-        </h1>
-        <form onSubmit={handleSubmit}>
-          <h1 className="h1__login">Login</h1>
-          <div className="form__wrapper">
-            <input
-              type="text"
-              name="email"
-              value={data.email}
-              placeholder="Email..."
-              autoComplete="off"
-              onChange={handleChange}
-            />
+      <div className="wrapper_login">
+        <div className="title-login-container">
+          <h1 className="title-login">
+            Photo<span className="span_login">Share</span>
+          </h1>
+        </div>
+        <div className="form_login__wrapper">
+          <form onSubmit={handleSubmit} className="form__login">
+            <h1 className="h1__login">Login</h1>
+            <div className="inputs__container">
+              <input
+                type="text"
+                name="email"
+                value={data.email}
+                placeholder="Email..."
+                autoComplete="off"
+                onChange={handleChange}
+                className="input__login"
+              />
 
-            <input
-              type="password"
-              name="pass"
-              value={data.pass}
-              placeholder="Password..."
-              onChange={handleChange}
-            />
-
-            <button type="submit" className="btn-register" disabled={loading}>
-              {loading ? <span>Loading...</span> : "Login"}
+              <input
+                type="password"
+                name="pass"
+                value={data.pass}
+                placeholder="Password..."
+                onChange={handleChange}
+                className="input__login"
+              />
+            </div>
+            <button className="login__btn">
+              {loading ? "Loading..." : "Login"}
             </button>
-          </div>
-          <p>
-            Dont have an account? <a href="/register">Sign Up</a>
-          </p>
-        </form>
+            <p>
+              Dont have an account? <a href="/register">Sign Up</a>
+            </p>
+          </form>
+        </div>
       </div>
     </>
   );

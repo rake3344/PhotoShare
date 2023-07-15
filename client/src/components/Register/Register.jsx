@@ -64,61 +64,71 @@ export default function Register() {
 
   return (
     <>
-      <div className="wrapper">
-        <h1 className="h1__register">PhotoShare</h1>
-        <form onSubmit={handleSubmit}>
-          <h1 className="registration__title">Sign Up</h1>
-          <div className="form__wrapper">
-            <input
-              type="text"
-              name="first_name"
-              value={data.first_name}
-              placeholder="Name..."
-              autoComplete="off"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="last_name"
-              value={data.last_name}
-              placeholder="Last Name..."
-              autoComplete="off"
-              onChange={handleChange}
-            />
-            <input
-              type="text"
-              name="email"
-              value={data.email}
-              placeholder="Email..."
-              autoComplete="off"
-              onChange={handleChange}
-            />
+      <div className="wrapper__register">
+        <div className="title-register-container">
+          <h1 className="h1__register">
+            Photo<span className="register-span">Share</span>
+          </h1>
+        </div>
+        <div className="form-register__wrapper">
+          <form onSubmit={handleSubmit} className="form__register">
+            <h1 className="signup-title">Sign Up</h1>
+            <div className="form__wrapper">
+              <input
+                type="text"
+                name="first_name"
+                value={data.first_name}
+                placeholder="Name..."
+                autoComplete="off"
+                className="input-register"
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="last_name"
+                value={data.last_name}
+                placeholder="Last Name..."
+                autoComplete="off"
+                className="input-register"
+                onChange={handleChange}
+              />
+              <input
+                type="text"
+                name="email"
+                value={data.email}
+                placeholder="Email..."
+                autoComplete="off"
+                className="input-register"
+                onChange={handleChange}
+              />
 
-            <input
-              type="text"
-              name="username"
-              value={data.username}
-              placeholder="Username..."
-              autoComplete="off"
-              onChange={handleChange}
-            />
+              <input
+                type="text"
+                name="username"
+                value={data.username}
+                placeholder="Username..."
+                autoComplete="off"
+                className="input-register"
+                onChange={handleChange}
+              />
 
-            <input
-              type="password"
-              name="pass"
-              value={data.pass}
-              placeholder="Password..."
-              onChange={handleChange}
-            />
-
+              <input
+                type="password"
+                name="pass"
+                value={data.pass}
+                placeholder="Password..."
+                className="input-register"
+                onChange={handleChange}
+              />
+            </div>
             <button type="submit" className="btn-register">
               {loading ? "Loading..." : "Sign Up"}
             </button>
-          </div>
-          <p>
-            Already have an account? <a href="/">Sign In</a>
-          </p>
-        </form>
+            <p className="p-account">
+              Already have an account? <a href="/">Sign In</a>
+            </p>
+          </form>
+        </div>
       </div>
     </>
   );

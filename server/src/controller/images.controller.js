@@ -4,6 +4,7 @@ import {
   countLikes,
   countPosts,
   countPostsFromUser,
+  deleteImages,
   dislikeImages,
   getImagesById,
   getImagesByUser,
@@ -133,6 +134,23 @@ export const getCountPostsFromUser = async (req, res) => {
     if (user.length === 0) res.status(200).json({ msg: "No login" });
     const posts = await countPostsFromUser(user_id);
     res.status(200).json({ posts: posts[0].posts });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const imageDelete = async (req, res) => {
+  try {
+    const { id } = req;
+    const { image_id } = req.params;
+    const user = await getUserLogin(id);
+    if (user.length === 0) res.status(200).json({ msg: "No login" });
+    const imageDelete = await deleteImages(image_id);
+    if (imageDelete === true) {
+      res.status(200).json({ msg: "Image deleted" });
+    } else {
+      res.status(200).json({ msg: imageDelete });
+    }
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

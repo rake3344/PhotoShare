@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
-import { axiosInterceptor } from "../auth/auth";
+import { axiosInterceptor, getToken } from "../auth/auth";
 import axios from "axios";
 import Navbar from "../Navbar/Navbar";
 import Loader from "../Loader/Loader";
 import { Link } from "react-router-dom";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 
 axiosInterceptor();
 export default function Profile() {
@@ -56,6 +57,7 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchImages = async () => {
+      setLoading(true);
       await axios.get("/images/get-images").then((resp) => {
         setImages(resp.data.images);
         setLoading(false);
@@ -83,45 +85,41 @@ export default function Profile() {
       <>
         <Navbar />
         <div className="profile">
-          <header className="profile__header">
-            <div className="profile__header__container">
-              <div className="container__header__profile">
-                <div className="container__header__image">
-                  <img
-                    src={
-                      data.profile_photo != null
-                        ? `../../src/uploads/${data.profile_photo}`
-                        : "../../src/uploads/user-default.png"
-                    }
-                    alt="profile-image"
-                  />
-                </div>
-                <div className="profile-user-settings">
-                  <h1 className="profile-username">{data.username}</h1>
-                  <button className="profile-edit-btn">Edit Profile</button>
-                </div>
-                <div className="profile-stats">
-                  <ul>
-                    <li>
-                      <span className="profile-stats-count">{posts}</span> posts
-                    </li>
-                    <li>
-                      <span className="profile-stats-count">{followers}</span>{" "}
-                      followers
-                    </li>
-                    <li>
-                      <span className="profile-stats-count">{following}</span>{" "}
-                      following
-                    </li>
-                  </ul>
-                </div>
-                <div className="profile-bio">
-                  <span>{data.email}</span>
-                  <span className="profile-real-name">{data.name}</span>
-                </div>
+          <div className="profile__wrapper">
+            <div className="profile__image__wrapper">
+              <img
+                src={
+                  data.profile_photo != null
+                    ? `../../src/uploads/${data.profile_photo}`
+                    : `../../src/uploads/user-default.png`
+                }
+                alt="profile-pic"
+                className="profile__image"
+              />
+              <Link to="/change-pic" className="link-edit-pic">
+                <label className="label-pic">
+                  <MdOutlineAddPhotoAlternate className="icon" />
+                </label>
+              </Link>
+            </div>
+            <div className="profile__info">
+              <div className="profile__username">
+                <h1 className="username__info">{data.username}</h1>
+                <Link to="/edit">
+                  <button className="edit-profile-btn">Edit profile</button>
+                </Link>
+              </div>
+              <div className="profile__stats">
+                <span className="user__stats">{posts} posts</span>
+                <span className="user__stats">{followers} followers</span>
+                <span className="user__stats">{following} following</span>
+              </div>
+              <div className="profile__name__email">
+                <span>{data.email}</span>
+                <span>{data.name}</span>
               </div>
             </div>
-          </header>
+          </div>
           <div className="img-area">
             <div className="img-area__wrapper">
               {images &&

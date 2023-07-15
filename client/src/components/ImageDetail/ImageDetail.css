@@ -148,6 +148,7 @@
   height: 30px;
   border-radius: 60px;
   margin-right: 1rem;
+  object-fit: cover;
 }
 
 .comments {
@@ -221,4 +222,22 @@
 
 .edit-icon:active {
   transform: scale(1);
+}
+
+.detail-rigth-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.5rem;
+}
+
+.trash {
+  margin-left: 0.4rem;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.trash:hover {
+  transform: scale(1.1);
 }

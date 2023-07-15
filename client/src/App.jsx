@@ -10,6 +10,8 @@ import Admin from "./components/Admin/Admin";
 import Upload from "./components/Upload/Upload";
 import UserProfile from "./components/UserProfile/UserProfile";
 import ImageDetail from "./components/ImageDetail/ImageDetail";
+import Edit from "./components/Edit/Edit";
+import ChangeProfilePic from "./components/ChangeProfilePic/ChangeProfilePic";
 
 function App() {
   const access = decodeToken();
@@ -42,6 +44,11 @@ function App() {
         <Route
           path="/image/:image_id"
           element={access ? <ImageDetail /> : <Navigate to="/" />}
+        />
+        <Route path="/edit" element={access ? <Edit /> : <Navigate to="/" />} />
+        <Route
+          path="/change-pic"
+          element={access ? <ChangeProfilePic /> : <Navigate to="/" />}
         />
       </Routes>
     </>

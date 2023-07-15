@@ -56,11 +56,13 @@ export default function ImageDetail() {
     }
   };
 
-  const commentFetch = async () => {
-    const resp = await axios.get(`/comments/image-comments/${image_id}`);
-    setComments(resp.data.comments);
-  };
-  commentFetch();
+  useEffect(() => {
+    const commentFetch = async () => {
+      const resp = await axios.get(`/comments/image-comments/${image_id}`);
+      setComments(resp.data.comments);
+    };
+    commentFetch();
+  }, [commentData]);
 
   // ------------------ Comments ------------------ //
 
@@ -90,8 +92,28 @@ export default function ImageDetail() {
               />
               <span className="profile-name">{image[0]?.username}</span>
             </div>
-            <div className="likes">
-              <Likes image_id={image_id} />
+            <div className="detail-rigth-section">
+              <div className="likes">
+                <Likes image_id={image_id} />
+              </div>
+              <div className="delete-image">
+                {user.id_user === image[0]?.id_user ? (
+                  <BsTrash
+                    className="trash"
+                    onClick={() => {
+                      const deleteImage = async () => {
+                        const resp = await axios.delete(
+                          `/images/delete-img/${image_id}`
+                        );
+                        if (resp.data.msg === "Image deleted") {
+                          window.location.href = "/profile";
+                        }
+                      };
+                      deleteImage();
+                    }}
+                  />
+                ) : null}
+              </div>
             </div>
           </div>
           <div className="detail-img">
@@ -153,7 +175,7 @@ export default function ImageDetail() {
                                       `/comments/${comment.id_comments}`
                                     );
                                     if (resp.data.msg === "Comment deleted") {
-                                      commentFetch();
+                                      window.location.reload();
                                     }
                                   };
                                   deleteComment();

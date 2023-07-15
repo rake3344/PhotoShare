@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap");
+
+.edit-pic-container {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  margin-top: 3rem;
+}
+
+.change-title {
+  text-align: center;
+  font-family: "Shadows Into Light", cursive;
+}
+
+.change-span {
+  font-family: "Shadows Into Light", cursive;
+  color: #a569bd;
+}
+
+.form__wrapper {
+  width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.form__wrapper {
+  width: 500px;
+  margin: auto;
+  padding: 20px;
+  margin-top: 15%;
+}
+
+.submit__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-btn {
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  background: #a569bd;
+  color: #fff;
+  font-size: 1em;
+  outline: none;
+  margin-top: 3rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.change-btn:hover {
+  background: #fff;
+  color: #a569bd;
+  border: 1px solid #a569bd;
+  cursor: pointer;
+}

@@ -30,7 +30,7 @@ export const uploadImages = async (id_user, id_image, imageFile) => {
 export const getImagesUser = async (id_user) => {
   try {
     const [images] = await pool.query(
-      "SELECT * FROM images WHERE user_id = ?",
+      "SELECT * FROM images WHERE user_id = ? && activo = 1",
       [id_user]
     );
     return images;
@@ -147,6 +147,17 @@ export const countPostsFromUser = async (id_user) => {
       [id_user]
     );
     return posts;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteImages = async (id_image) => {
+  try {
+    await pool.query("UPDATE images SET activo = 0 WHERE id_image = ?", [
+      id_image,
+    ]);
+    return true;
   } catch (error) {
     return error;
   }
